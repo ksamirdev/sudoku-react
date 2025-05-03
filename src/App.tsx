@@ -2,7 +2,8 @@ import "./App.css";
 
 import { useCallback, useMemo, useState } from "react";
 import { cn, isNumberKey } from "./utils/utils";
-import { isValidSudoku } from "./utils/sudoku";
+import { generateSudokuPuzzle, isValidSudoku } from "./utils/sudoku";
+import { SudokuCell } from "./types";
 
 const MATRIX_SIZE = 9;
 
@@ -20,15 +21,13 @@ const INITIAL_VALUES: number[][] = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-export type Cell = number | null;
-
 function App() {
-  const [board, setBoard] = useState<Cell[][]>(INITIAL_VALUES);
+  const [board, setBoard] = useState<SudokuCell[][]>(INITIAL_VALUES);
 
   const isValidSudokuMemo = useMemo(() => isValidSudoku(board), [board]);
 
   const handleUpdateCellValue = useCallback(
-    (i: number, j: number, value: Cell) => {
+    (i: number, j: number, value: SudokuCell) => {
       setBoard((prev) => {
         const updated = prev.map((row, rowIndex) =>
           row.map((cell, colIndex) =>
@@ -40,6 +39,10 @@ function App() {
     },
     []
   );
+
+  const handlePuzzleGenerate = () => {
+    setBoard(generateSudokuPuzzle(53));
+  };
 
   return (
     <div className="flex flex-col gap-10 items-center justify-center">
@@ -94,6 +97,10 @@ function App() {
 
       <div className={isValidSudokuMemo ? "text-green-500" : "text-red-500"}>
         Sudoku is {isValidSudokuMemo ? "valid" : "invalid"}
+      </div>
+
+      <div>
+        <button onClick={handlePuzzleGenerate}>Generate</button>
       </div>
     </div>
   );
