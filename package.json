@@ -1,7 +1,7 @@
 {
   "name": "sudoku",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,7 @@
     "predeploy" : "pnpm run build",
     "deploy" : "gh-pages -d dist"
   },
-  "homepage": "https://ksamirdev.github.io/sudoku/",
+  "homepage": "https://ksamirdev.github.io/sudoku-react",
   "dependencies": {
     "clsx": "^2.1.1",
     "react": "^19.0.0",
