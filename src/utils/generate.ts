@@ -3,7 +3,7 @@ import { SudokuBoard } from "../types";
 export function generateSudokuPuzzle(emptyCells: number = 40): SudokuBoard {
   const SIZE = 9;
   const board: number[][] = Array.from({ length: SIZE }, () =>
-    Array(SIZE).fill(0)
+    Array(SIZE).fill(0),
   );
 
   function isSafe(row: number, col: number, num: number): boolean {

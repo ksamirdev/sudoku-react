@@ -34,7 +34,7 @@ function reducer(state: GameState, action: SudokuAction): GameState {
       return {
         ...state,
         board: state.board.map((r, i) =>
-          r.map((cell, j) => (i === row && j === col ? value : cell))
+          r.map((cell, j) => (i === row && j === col ? value : cell)),
         ),
       };
     }
@@ -49,12 +49,12 @@ export function useSudokuGame() {
 
   const isLocked = useCallback(
     (row: number, col: number) => state.clues[row][col] !== null,
-    [state.clues]
+    [state.clues],
   );
 
   const isBoardComplete = useMemo(
     () => state.board.every((row) => row.every((cell) => cell !== null)),
-    [state.board]
+    [state.board],
   );
 
   const isValid = useMemo(() => isValidSudoku(state.board), [state.board]);
