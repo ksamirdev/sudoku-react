@@ -7,7 +7,7 @@ export interface CellConflict {
 
 export function computeConflicts(board: SudokuCell[][]): CellConflict[][] {
   const result: CellConflict[][] = Array.from({ length: 9 }, () =>
-    Array.from({ length: 9 }, () => ({ isDimmed: false, isConflict: false }))
+    Array.from({ length: 9 }, () => ({ isDimmed: false, isConflict: false })),
   );
 
   // Rows
