@@ -5,7 +5,7 @@ import { useSudokuGame } from "./hooks/useSudokuGame";
 import { Cell } from "./components/Cell";
 
 function App() {
-  const { board, isLocked, isValid, isBoardComplete, dispatch } =
+  const { board, isLocked, isValid, isBoardComplete, conflicts, dispatch } =
     useSudokuGame();
 
   return (
@@ -26,11 +26,14 @@ function App() {
                 className={cn(
                   "size-10 relative overflow-hidden grid place-content-center place-items-center border-l border-neutral-500",
                   (j === 3 || j === 6) && "border-l-2 border-l-neutral-200",
+                  conflicts[i][j].isConflict && "ring-1 ring-inset ring-red-600",
                 )}
               >
                 <Cell
                   value={cell}
                   isLocked={isLocked(i, j)}
+                  isDimmed={conflicts[i][j].isDimmed}
+                  isConflict={conflicts[i][j].isConflict}
                   onChange={(value) =>
                     dispatch({
                       type: "set_cell",

@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useReducer } from "react";
 import { generateSudokuPuzzle } from "../utils/generate";
-import { isValidSudoku } from "../utils/validate";
+import { computeConflicts, isValidSudoku } from "../utils/validate";
 import { SudokuBoard, SudokuCell } from "../types";
 
 export type SudokuAction =
@@ -59,11 +59,14 @@ export function useSudokuGame() {
 
   const isValid = useMemo(() => isValidSudoku(state.board), [state.board]);
 
+  const conflicts = useMemo(() => computeConflicts(state.board), [state.board]);
+
   return {
     board: state.board,
     isLocked,
     isValid,
     isBoardComplete,
+    conflicts,
     dispatch,
   };
 }
